@@ -90,7 +90,7 @@ def config_cache(options, system):
                                    size=options.l3_size,
                                    assoc=options.l3_assoc)
         if options.l3_replacement_policy == "RRIP":
-            system.l3.replacement_policy = BRRIPRP()
+            system.l3.replacement_policy = RRIPRP()
         if options.l3_replacement_policy == "LRU":
             system.l3.replacement_policy = LRURP()
  
