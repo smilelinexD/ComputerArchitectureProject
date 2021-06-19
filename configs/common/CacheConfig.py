@@ -89,6 +89,10 @@ def config_cache(options, system):
 	system.l3 = l3_cache_class(clk_domain=system.cpu_clk_domain,
                                    size=options.l3_size,
                                    assoc=options.l3_assoc)
+        if options.l3_replacement_policy == "RRIP":
+            system.l3.replacement_policy = BRRIPRP()
+        if options.l3_replacement_policy == "LRU":
+            system.l3.replacement_policy = LRURP()
  
         system.tol2bus = L2XBar(clk_domain = system.cpu_clk_domain)
 	system.tol3bus = L3XBar(clk_domain = system.cpu_clk_domain)
