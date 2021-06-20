@@ -89,10 +89,29 @@ def config_cache(options, system):
 	system.l3 = l3_cache_class(clk_domain=system.cpu_clk_domain,
                                    size=options.l3_size,
                                    assoc=options.l3_assoc)
-        if options.l3_replacement_policy == "RRIP":
-            system.l3.replacement_policy = RRIPRP()
-        if options.l3_replacement_policy == "LRU":
+        if options.l3_replacement_policy == "FIFO":
+            system.l3.replacement_policy = FIFORP()
+        elif options.l3_replacement_policy == "SecondChance":
+            system.l3.replacement_policy = SecondChanceRP()
+        elif options.l3_replacement_policy == "LFU":
+            system.l3.replacement_policy = LFURP()
+        elif options.l3_replacement_policy == "LRU":
             system.l3.replacement_policy = LRURP()
+        elif options.l3_replacement_policy == "BIP":
+            system.l3.replacement_policy = BIPRP()
+        elif options.l3_replacement_policy == "LIP":
+            system.l3.replacement_policy = LIPRP()
+        elif options.l3_replacement_policy == "MRU":
+            system.l3.replacement_policy = MRURP()
+        elif options.l3_replacement_policy == "Random":
+            system.l3.replacement_policy = RandomRP()
+        elif options.l3_replacement_policy == "BRRIP":
+            system.l3.replacement_policy = BRRIPRP()
+        elif options.l3_replacement_policy == "RRIP":
+            system.l3.replacement_policy = RRIPRP()
+        elif options.l3_replacement_policy == "NRU":
+            system.l3.replacement_policy = NRURP()
+        
  
         system.tol2bus = L2XBar(clk_domain = system.cpu_clk_domain)
 	system.tol3bus = L3XBar(clk_domain = system.cpu_clk_domain)
